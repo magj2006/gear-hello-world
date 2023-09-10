@@ -1,6 +1,6 @@
 use gstd::String;
 use gtest::{Log, Program, System};
-use hello_world::InputMessages;
+use hello_world_io::InputMessages;
 
 #[test]
 fn hello_test() {

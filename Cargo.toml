@@ -5,18 +5,25 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-gstd = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47", features = [
-    "debug",
-] }
 
-parity-scale-codec = { version = "3", default-features = false }
-scale-info = { version = "2", default-features = false }
+[dependencies]
+gstd.workspace = true
+hello_world_io.workspace = true
 
 [build-dependencies]
-gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47", features = [
-    "wasm-opt",
-] }
+gear-wasm-builder.workspace = true
+hello_world_io.workspace = true
 
 [dev-dependencies]
-gtest = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
+gtest.workspace = true
+
+[workspace.dependencies]
+gstd = { git = "https://github.com/gear-tech/gear.git", features = [
+    "debug",
+], rev = "v0.3.2" }
+gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "v0.3.2" }
+gmeta = { git = "https://github.com/gear-tech/gear.git", rev = "v0.3.2" }
+gtest = { git = "https://github.com/gear-tech/gear.git", rev = "v0.3.2" }
+hello_world_io = { path = "src/io" }
+parity-scale-codec = { version = "3", default-features = false }
+scale-info = { version = "2", default-features = false }

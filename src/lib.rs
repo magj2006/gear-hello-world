@@ -1,13 +1,8 @@
 #![no_std]
-use gstd::{debug, msg, prelude::*, ActorId};
+use gstd::{debug, msg, prelude::*, String};
+use hello_world_io::InputMessages;
 
 static mut GREETING: Option<String> = None;
-
-#[derive(Encode, Decode, TypeInfo)]
-pub enum InputMessages {
-    SendHelloTo(ActorId),
-    SendHelloReply,
-}
 
 #[no_mangle]
 extern "C" fn handle() {
@@ -30,4 +25,10 @@ extern "C" fn init() {
     let greeting: String = msg::load().expect("Can't load init message");
     debug!("Program was initialized with message {:?}", greeting);
     unsafe { GREETING = Some(greeting) };
+}
+
+#[no_mangle]
+extern "C" fn state() {
+    let greeting = unsafe { GREETING.get_or_insert(Default::default()) };
+    msg::reply(greeting, 0).expect("Failed to share state");
 }
